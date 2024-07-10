@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            font-family: 'Poppins';
+        }
+
+        .container {
+            height: auto;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            flex-direction: column;
+        }
+
+        .header {
+            height: 20vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #3e3e3e;
+        }
+
+        .header h1 {
+            font-size: 45px;
+            font-weight: 600;
+        }
+
+        .header h3 {
+            font-size: 19px;
+            font-weight: 500;
+        }
+
+        #content {
+            margin-top: 2%;
+            width: 75%;
+            height: 100%;
+            display: grid;
+            justify-content: space-between;
+            grid-template-columns: 33% 33% 33%;
+            column-gap: 34.3px;
+            row-gap: 30px;
+            padding-bottom: 10px;
+            color: white;
+        }
+
+        .card {
+            background: #6C757D;
+            width: 100%;
+            height: 270px;
+            border-radius: 20px;
+            border: 2px solid black;
+        }
+
+        .row1 {
+            width: 100%;
+            height: 40%;
+            display: flex;
+            padding-bottom: 50px;
+        }
+
+        .item1 {
+            height: 100%;
+            width: 40%;
+            padding-top: 15px;
+            padding-left: 15px;
+        }
+
+        .img {
+            width: 150px;
+            border-radius: 10px;
+            border: 2px solid black;
+            transition: 0.1s;
+        }
+
+        .img:hover {
+            border-radius: 10px;
+            border: 0px solid black;
+        }
+
+        .item2 {
+            height: 100%;
+            width: 60%;
+            padding-top: 15px;
+            padding-left: 15px;
+        }
+
+        .title-surah {
+            margin-bottom: 30px;
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .ustad-title {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .nama-title {
+            font-size: 30px;
+        }
+
+        .ayat-tipe {
+            font-size: 15px;
+        }
+
+        .row2 {
+            width: 100%;
+            height: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .audio {
+            padding-top: 20px;
+            width: 90%;
+        }
+
+        #footer {
+            height: 80px;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        #footer p {
+            font-weight: 200;
+        }
+
+        @media screen and (max-width : 768px) {
+            .title1 {
+                font-size: 30px;
+            }
+
+            #content {
+                padding-top: 20px;
+                width: 100%;
+                justify-content: center;
+                grid-template-columns: 90%;
+                row-gap: 15px;
+            }
+
+            .card {
+                background: #6C757D;
+                width: 100%;
+                height: 230px;
+                border-radius: 20px;
+                border: 2px solid black;
+            }
+
+            .row1 {
+                width: 100%;
+                height: 40%;
+                display: flex;
+                padding-bottom: 40px;
+            }
+
+            .img {
+                width: 120px;
+                border-radius: 10px;
+                border: 2px solid black;
+                transition: 0.1s;
+            }
+
+            .title-surah {
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+
+            .ustad-title {
+                font-size: 10px;
+                font-weight: 500;
+            }
+
+            .nama-title {
+                font-size: 30px;
+            }
+
+            .ayat-tipe {
+                font-size: 13px;
+            }
+
+            .audio {
+                padding-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Qur’an-In</h1>
+            <h3>audio al-qur'an online</h3>
+        </div>
+        <div class="content" id="content"></div>
+        <div class="footer" id="footer"></div>
+    </div>
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+
+    <script>
+        const url = 'https://raw.githubusercontent.com/penggguna/QuranJSON/master/quran.json';
+        const container = document.getElementById('content');
+
+        fetch(url).then(response => response.json()).then(data => {
+            const list = data;
+
+            list.forEach(quran => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+
+                const row1 = document.createElement('div');
+                row1.classList.add('row1');
+
+                const item1 = document.createElement('div');
+                item1.classList.add('item1');
+
+                const img = document.createElement('img');
+                img.classList.add('img');
+                img.src = 'https://i.scdn.co/image/ab6761610000e5ebac381d07bb60d7bfd3be1fe0';
+
+                const item2 = document.createElement('div');
+                item2.classList.add('item2');
+
+                const surah = document.createElement('p');
+                surah.classList.add('title-surah');
+                surah.innerText = 'Surah Ke ' + quran.number_of_surah;
+
+                const ustad = document.createElement('p');
+                ustad.classList.add('ustad-title');
+                ustad.innerText = 'Shaykh Mishari Alafasy';
+
+                const nama = document.createElement('h2');
+                nama.classList.add('nama-title');
+                nama.innerText = quran.name;
+
+                const ayat = document.createElement('p');
+                ayat.classList.add('ayat-tipe');
+                ayat.innerText = quran.type + ' - ' + quran.number_of_ayah + ' ayat';
+
+                const row2 = document.createElement('div');
+                row2.classList.add('row2');
+
+                const audio = document.createElement('audio');
+                audio.classList.add('audio');
+                audio.controls = true;
+                audio.src = quran.recitation;
+
+                container.append(card);
+                card.append(row1, row2);
+                row1.append(item1, item2);
+                item1.append(img);
+                item2.append(surah, ustad, nama, ayat);
+                row2.append(audio);
+            })
+
+            const footer = document.getElementById('footer')
+            const footerText = document.createElement('p')
+            footerText.innerText = '© Firja Abiyu . All right reserved'
+            footer.append(footerText)
+        })
+    </script>
+
+</body>
+
+</html>
